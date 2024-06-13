@@ -1,3 +1,4 @@
+import sys
 import click
 from rich.console import Console
 from rich.theme import Theme
@@ -38,6 +39,7 @@ def user_input():
     a: Add TODO
     b: Delete TODO
     c: List TODOs
+    d: Exit
     """
     console.print(description)
     console.line()
@@ -49,14 +51,15 @@ def user_input():
         match s:
             case "a":
                 return add_todo()
-            # case "b":
-            #     return print(b)
-            # case "c":
-            #     return print(c)
-            # case "d":
-            #     return print(d)
+            case "b":
+                return delete_todo()
+            case "c":
+                return list_todos()
+            case "d":
+                exit_message()
+                return sys.exit()
             case _:
-                print("Please choose letters a, b, c")
+                print("Please choose an option above.")
 
 
 @click.command()
@@ -98,8 +101,12 @@ def list_todos(priority, todofile):
         for idx, todo in enumerate(todo_list):
             print(f"({idx}) - {todo}")
 
-
-
+def exit_message():
+    console.line()
+    console.print('You selected to exit!', style='warning')
+    console.line()
+    console.rule('Goodbye', style='warning')
+    console.line()
 
 
 mycommands.add_command(add_todo)
