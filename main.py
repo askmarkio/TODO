@@ -36,10 +36,10 @@ def user_input():
     description = """
     Please choose an option:
     
-    a: Add TODO
-    b: Delete TODO
-    c: List TODOs
-    d: Exit
+    1: Add TODO
+    2: Delete TODO
+    3: List TODOs
+    4: Exit
     """
     console.print(description)
     console.line()
@@ -49,13 +49,13 @@ def user_input():
 
         # Match to the user's input 
         match s:
-            case "a":
+            case "1":
                 return add_todo()
-            case "b":
+            case "2":
                 return delete_todo()
-            case "c":
+            case "3":
                 return list_todos()
-            case "d":
+            case "4":
                 exit_message()
                 return sys.exit()
             case _:
@@ -69,12 +69,15 @@ def user_input():
 @click.option('-d', '--desc', prompt='Describe the todo', help='The description of the todo')
 def add_todo(name, desc, priority, todofile):
     filename = todofile if todofile is not None else 'TODO.md'
+    priority_val = PRIORITIES[priority]
+        
     with open(filename, 'a+') as f:
-        f.write(f"{name}: {desc} [Priority: {PRIORITIES[priority]}]")
+        f.write(f"[ ] {name}: {desc} [Priority: {PRIORITIES[priority]}]")
+        f.write('\n')
         console.line()
         console.rule('[bold green]Success[/]', style='success')
         console.line()
-        console.print(f'Your TODO [bold green]{name}[/] has been added!')
+        console.print(f'Your TODO [bold green]{name}[/] with a priority of {priority_val} has been added!')
         console.line()
 
 

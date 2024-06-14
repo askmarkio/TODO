@@ -1,1 +1,0 @@
-renamed todo file: change the default naming of the todo file [Priority: Medium]Create TODO templates: add the TODO into a Todo section. Create a in progress and done section [Priority: Medium]create clui like lazygit: Have this little app list the todos and via keybindings add/edit/delete or mark done [Priority: Medium]
